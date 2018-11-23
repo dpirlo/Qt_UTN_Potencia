@@ -32,16 +32,11 @@ MainWindow::MainWindow(QWidget *parent) :
     /** @todo: Ver la posibilidad de maximizar la ventana */
     this->setFixedSize(this->maximumSize());
     setPreferencesConfiguration();
-    ui->comboBox_head_select_graph->hide();
-    ui->tabWidget_mca->setCurrentIndex(1);
     QTimer *timerw = new QTimer(this);
     connect(timerw, SIGNAL(timeout()), this, SLOT(updateCaption()));
     CargoTemaOscuro();
     timerw->start(1000);
     
-    ui->tabWidget_general->removeTab(0);
-    ui->tabWidget_general->removeTab(2);
-
     //GitCheckerStarter();
     
 
@@ -498,11 +493,11 @@ size_t MainWindow::sendString(string msg, string end)
  */
 void MainWindow::on_pushButton_send_terminal_clicked()
 {
-    QString sended = ui->lineEdit_terminal->text();
+    QString sended ="";// ui->lineEdit_terminal->text();
     size_t bytes=0;
     string msg;
    // string end_stream=arpet->getEnd_MCA();
-    QString Cabezal=ui->comboBox_head_select_terminal->currentText();
+    QString Cabezal="";//ui->comboBox_head_select_terminal->currentText();
     arpet->portDisconnect();
 
     try
@@ -519,8 +514,8 @@ void MainWindow::on_pushButton_send_terminal_clicked()
         QString q_msg=QString::fromStdString(msg);
         QString q_bytes=QString::number(bytes);
 
-        ui->label_size_terminal->setText(q_bytes);
-        ui->label_received_terminal->setText(q_msg);
+        //ui->label_size_terminal->setText(q_bytes);
+        //ui->label_received_terminal->setText(q_msg);
         arpet->portDisconnect();
     }
     catch(Exceptions & ex)
@@ -541,7 +536,7 @@ void MainWindow::on_pushButton_flush_terminal_clicked()
  */
 void MainWindow::on_pushButton_clear_terminal_clicked()
 {
-    ui->lineEdit_terminal->clear();
+    //ui->lineEdit_terminal->clear();
 }
 
 QVector<int> MainWindow::getCustomPlotParameters()
@@ -569,9 +564,9 @@ QVector<int> MainWindow::getCustomPlotParameters()
 void MainWindow::mousePressGraphsLog()
 {
     if (ui->specPMTs_3->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
-        ui->specPMTs_3->axisRect()->setRangeDrag(ui->specPMTs->xAxis->orientation());
+        ui->specPMTs_3->axisRect()->setRangeDrag(ui->specPMTs_3->xAxis->orientation());
     else if (ui->specPMTs_3->yAxis->selectedParts().testFlag(QCPAxis::spAxis))
-        ui->specPMTs_3->axisRect()->setRangeDrag(ui->specPMTs->yAxis->orientation());
+        ui->specPMTs_3->axisRect()->setRangeDrag(ui->specPMTs_3->yAxis->orientation());
     else
         ui->specPMTs_3->axisRect()->setRangeDrag(Qt::Horizontal|Qt::Vertical);
 }
@@ -741,7 +736,7 @@ void MainWindow::on_pushButton_2_clicked()
         {
           x[i] = i;
           TenS[i]=qSin(i/10.0);
-          CorS[i]=qSin(i/10.0);
+          CorS[i]=qSin(i/10.0)*0.8;
           PotS[i]=TenS[i]*CorS[i];
           VmedTen+=TenS[i];
           VmedCor+=CorS[i];
@@ -878,4 +873,14 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
 
 
    }
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    SetPMTs.show();
 }
