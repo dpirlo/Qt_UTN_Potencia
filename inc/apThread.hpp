@@ -9,12 +9,10 @@
  *
  * @note Clase heredada de QObject
  *
- * @author Ariel Hernández
+ * @author Damián Pirlo
  *
  * @version $Version
  *
- * Contacto: ahernandez@cae.cnea.gov.ar
- *           ariel.h.estevenz@ieee.org
  *
  */
 #ifndef APTHREAD_H
@@ -45,7 +43,7 @@ namespace ap {
       Q_OBJECT
 
   public:
-      explicit Thread(shared_ptr<MCAE> _arpet, QMutex* _mutex ,QObject *parent = 0);
+      explicit Thread(shared_ptr<MCAE> _ComBT, QMutex* _mutex ,QObject *parent = 0);
       void requestLog();
       void requestMCA();
       int GitUpdater();
@@ -55,7 +53,7 @@ namespace ap {
 
 
   private:
-      shared_ptr<MCAE> arpet;
+      shared_ptr<MCAE> ComBT;
       QList<int> checkedHeads;
       QList<QString> pmt_selected_list;
       bool _abort;

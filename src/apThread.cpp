@@ -8,20 +8,18 @@ using namespace ap;
  * Constructor de la clase
  *
  * Se inicializan todos los _flags_ utilizados durante la ejecución del hilo. Esta clase contiene todos los métodos y propiedades para acceder, administrar,
- * configurar los threads ejecutados en la aplicación *qt-mca*.
+ * configurar los threads ejecutados en la aplicación *qt-utn*.
  *
- * Recibe como parametro un objeto de la clase MCAE para acceder a todos los dispositivos del tómografo ARPET (fotomultiplicadores, cabezales, placas de
- * alta tensión, etc) y un objeto de la clase QMutex para compartir el recurso del puerto serie.
  *
  * @note Se documentan las propiedades más importantes.
  *
- * @param _arpet
+ * @param _ComBT
  * @param _mutex
  * @param parent
  */
-Thread::Thread(shared_ptr<MCAE> _arpet, QMutex *_mutex, QObject *parent) :
+Thread::Thread(shared_ptr<MCAE> _ComBT, QMutex *_mutex, QObject *parent) :
     QObject(parent),
-    arpet(_arpet),
+    ComBT(_ComBT),
     _logging(false),
     _abort(false),
     temp(false),

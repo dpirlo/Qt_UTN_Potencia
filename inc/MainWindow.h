@@ -5,22 +5,16 @@
  *
  * Esta clase corresponde al entorno gráfico de la aplicación *qt-mca*
  *
- * Tiene como objetivo realizar el control y mantenimiento del tomógrafo por
- * emisión de positrones AR-PET.
- * Realiza el matenimiento y configuración de varios parámetros del equipo, tales
- * como calibración de los fotomultiplicadores y cabezales, control de temperatura,
- * control de alta tensión y cantidad de cuentas adquiridas en el equipo.
  *
- * @note Utiliza la clase MCAE para la comunicación con el ARPET.
+ * @note Utiliza la clase MCAE para la comunicación con el ComBT.
  *
  * @note Clase heredada de QMainWindow
  *
- * @author Ariel Hernández
+ * @author Damián Pirlo
  *
  * @version $Version
  *
- * Contacto: ahernandez@cae.cnea.gov.ar
- *           ariel.h.estevenz@ieee.org
+
  *
  */
 #ifndef MAINWINDOW_H
@@ -170,7 +164,7 @@ signals:
 private:
     Ui::MainWindow *ui;
     SetPreferences *pref;
-    shared_ptr<MCAE> arpet;
+    shared_ptr<MCAE> ComBT;
     QMutex mMutex, bMutex, Mutex_adq,Mutex_copy,Mutex_git;
     QThread *thread;
     Thread *worker;

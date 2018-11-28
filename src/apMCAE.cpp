@@ -7,10 +7,6 @@ using namespace ap;
  *
  * Constructor de la clase
  *
- * Se inicializan todas las propiedades respecto a las funciones de envío de datos serie con los protocolos: MCA, PSOC, Coincidencias y Calibración.
- * Al conjunto que engloba todos estos protocolos se lo denomina MCA Extendido. Esta clase contiene todos los métodos y propiedades para acceder, administrar,
- * configurar y monitoriar el tomógrafo por emisión de positrones ARPET.
- *
  * Solo admite como parámetro el tiempo que debe esperar el servicio de comunicación antes de emitir una excepción por _time out_. El tiempo por defecto es de 1 segundo.
  *
  * @note Se documentan las propiedades más importantes.
@@ -32,9 +28,9 @@ MCAE::MCAE(size_t timeout)
       PortBaudRate(921600),
       AnsAP_ON("ON"),
       AnsAP_OFF("OFF"),
-      AP_ON("ARPETON"),
-      AP_OFF("ARPETOFF"),
-      AP_STATUS("ARPETO?"),
+      AP_ON(""),
+      AP_OFF(""),
+      AP_STATUS(""),
       Head_MCAE("#C"),
       Head_MCA("@"),
       End_MCA("\r"),

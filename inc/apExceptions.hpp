@@ -8,12 +8,10 @@
  *
  * @note Clase heredada de QException
  *
- * @author Ariel Hernández
+ * @author Damián Pirlo
  *
  * @version $Version
  *
- * Contacto: ahernandez@cae.cnea.gov.ar
- *           ariel.h.estevenz@ieee.org
  *
  */
 #ifndef APEXCEPTIONS_H

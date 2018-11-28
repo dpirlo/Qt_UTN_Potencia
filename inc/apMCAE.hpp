@@ -3,17 +3,12 @@
  *
  * @brief Clase MCA Extendido
  *
- * Esta clase provee métodos y propiedades para el manejo del protocolo de comunicación del
- * tomográfo por emisión de positrones AR-PET. A partir del uso de esta clase se puede realizar
- * el mantenimiento, configuración y monitoreo del equipo.
- * La aplicación *qt-mca* utiliza esta clase en conjunto con clases de entorno gráfico de Qt.
  *
- * @author Ariel Hernández
+ * @author Damián Pirlo
  *
  * @version $Version
  *
- * Contacto: ahernandez@cae.cnea.gov.ar
- *           ariel.h.estevenz@ieee.org
+
  *
  */
 #ifndef APMCAE_H
@@ -89,7 +84,7 @@ using namespace boost::system;
 typedef shared_ptr<serial_port> serial_port_ptr;
 
 /**
- * El Namespace ap contiene los métodos y propiedades relacionados con la comunicación del equipo ARPET.
+ * El Namespace ap contiene los métodos y propiedades relacionados con la comunicación.
  */
 namespace ap {
 

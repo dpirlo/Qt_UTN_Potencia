@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# ARPET Software Management
+# Electronica de Potencia Software Management
 #
 # Project created by QtCreator 2015-10-14T11:09:17
 #
@@ -13,7 +13,7 @@ QT       += printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = qt-arpet
+TARGET = qt-Utn
 TEMPLATE = app
 
 SOURCES += src/main.cpp\

@@ -22,16 +22,16 @@ MainWindow::MainWindow(QWidget *parent) :
     init(false),
     log(true),
     stdout_mode(false),
-    initfile("/media/arpet/pet/calibraciones/03-info/cabezales/ConfigINI/config_cabs_linux.ini"),
-    root_config_path("/media/arpet/pet/calibraciones/03-info/cabezales"),
-    root_log_path(QDir::homePath() +"/.qt-mca/logs"),
-    preferencesdir(QDir::homePath() + "/.qt-mca"),
-    preferencesfile("qt-mca.conf"),
+    initfile(""),
+    root_config_path(""),
+    root_log_path(QDir::homePath() +""),
+    preferencesdir(QDir::homePath() + ""),
+    preferencesfile(""),
     ui(new Ui::MainWindow)
 {
-    arpet = shared_ptr<MCAE>(new MCAE());
+    ComBT = shared_ptr<MCAE>(new MCAE());
     thread = new QThread();
-    worker = new Thread(arpet, &mMutex);
+    worker = new Thread(ComBT, &mMutex);
 
     ui->setupUi(this);
     /** @todo: Ver la posibilidad de maximizar la ventana */
@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
  */
 MainWindow::~MainWindow()
 {
-    arpet->portDisconnect();
+    ComBT->portDisconnect();
     worker->abort();
     thread->wait();
     delete thread;
@@ -440,7 +440,7 @@ string MainWindow::readString(char delimeter)
 
     string msg;
     try{
-        msg = arpet->readString(delimeter, port_name.toStdString());
+        msg = ComBT->readString(delimeter, port_name.toStdString());
     }
     catch( Exceptions & ex ){
         Exceptions exception_stop(ex.excdesc);
@@ -466,11 +466,11 @@ size_t MainWindow::sendString(string msg, string end)
 {
     mMutex.lock();
 
-    arpet->portFlush();
+    ComBT->portFlush();
     size_t bytes_transfered = 0;
 
     try{
-        bytes_transfered = arpet->sendString(msg, end, port_name.toStdString());
+        bytes_transfered = ComBT->sendString(msg, end, port_name.toStdString());
     }
     catch(boost::system::system_error e){
         Exceptions exception_serial_port((string("No se puede acceder al puerto serie. Error: ")+string(e.what())).c_str());
@@ -494,17 +494,17 @@ void MainWindow::on_pushButton_send_terminal_clicked()
     QString sended ="";// ui->lineEdit_terminal->text();
     size_t bytes=0;
     string msg;
-   // string end_stream=arpet->getEnd_MCA();
+   // string end_stream=ComBT->getEnd_MCA();
     QString Cabezal="";//ui->comboBox_head_select_terminal->currentText();
-    arpet->portDisconnect();
+    ComBT->portDisconnect();
 
     try
     {
 
         port_name=ui->EditText_Puerto->text();
-        arpet->portConnect(port_name.toStdString().c_str());
+        ComBT->portConnect(port_name.toStdString().c_str());
 
-        //if(ui->checkBox_end_terminal->isChecked()) end_stream=arpet->getEnd_PSOC();
+        //if(ui->checkBox_end_terminal->isChecked()) end_stream=ComBT->getEnd_PSOC();
 
         bytes = sendString(sended.toStdString(),"");
         msg = readString();
@@ -514,12 +514,12 @@ void MainWindow::on_pushButton_send_terminal_clicked()
 
         //ui->label_size_terminal->setText(q_bytes);
         //ui->label_received_terminal->setText(q_msg);
-        arpet->portDisconnect();
+        ComBT->portDisconnect();
     }
     catch(Exceptions & ex)
     {
         QMessageBox::critical(this,tr("Atención"),tr(ex.excdesc));
-        arpet->portDisconnect();
+        ComBT->portDisconnect();
     }
 }
 /**
@@ -527,7 +527,7 @@ void MainWindow::on_pushButton_send_terminal_clicked()
  */
 void MainWindow::on_pushButton_flush_terminal_clicked()
 {
-    arpet->portFlush();
+    ComBT->portFlush();
 }
 /**
  * @brief MainWindow::on_pushButton_clear_terminal_clicked
@@ -681,15 +681,15 @@ void MainWindow::on_pushButton_send_terminal_2_clicked()
     QString sended ="";// ui->lineEdit_terminal->text();
     size_t bytes=0;
     string msg;
-   // string end_stream=arpet->getEnd_MCA();
+   // string end_stream=ComBT->getEnd_MCA();
     QString port=ui->EditText_Puerto->text();
-    //arpet->portDisconnect();
+    //ComBT->portDisconnect();
 
     try
     {
 
         port_name=ui->EditText_Puerto->text();
-        arpet->portConnect(port_name.toStdString().c_str());
+        ComBT->portConnect(port_name.toStdString().c_str());
 
         sended = ui->lineEdit_terminal_2->text();
 
@@ -703,12 +703,12 @@ void MainWindow::on_pushButton_send_terminal_2_clicked()
 
         //ui->label_size_terminal->setText(q_bytes);
         //ui->label_received_terminal->setText(q_msg);
-        arpet->portDisconnect();
+        ComBT->portDisconnect();
     }
     catch(Exceptions & ex)
     {
         QMessageBox::critical(this,tr("Atención"),tr(ex.excdesc));
-        arpet->portDisconnect();
+        ComBT->portDisconnect();
     }
 }
 
@@ -763,7 +763,7 @@ void MainWindow::on_pushButton_2_clicked()
     // pass data points to graphs:
 
     try{
-        arpet->portConnect(port_name.toStdString().c_str());
+        ComBT->portConnect(port_name.toStdString().c_str());
 
         switch(ui->comboBox_3->currentIndex()){
         case 0:{
@@ -1016,7 +1016,7 @@ void MainWindow::on_pushButton_2_clicked()
     catch(Exceptions & ex)
     {
         QMessageBox::critical(this,tr("Atención"),tr(ex.excdesc));
-        arpet->portDisconnect();
+        ComBT->portDisconnect();
     }
 
     // let the ranges scale themselves so graph 0 fits perfectly in the visible area:
@@ -1155,9 +1155,9 @@ void MainWindow::on_pb_enviar_conf_clicked()
     QString sended ="";// ui->lineEdit_terminal->text();
     size_t bytes=0;
     string msg;
-   // string end_stream=arpet->getEnd_MCA();
+   // string end_stream=ComBT->getEnd_MCA();
     QString port=ui->EditText_Puerto->text();
-    //arpet->portDisconnect();
+    //ComBT->portDisconnect();
 
     int SetConfig=ui->cb_alpha_pw->currentIndex();
     QString Config;
@@ -1193,7 +1193,7 @@ void MainWindow::on_pb_enviar_conf_clicked()
     {
 
         port_name="/dev/rfcomm0";
-        arpet->portConnect(port_name.toStdString().c_str());
+        ComBT->portConnect(port_name.toStdString().c_str());
 
         sended =Modo+Config+(char) ui->le_conf->text().toInt();//+";";
 
@@ -1207,12 +1207,12 @@ void MainWindow::on_pb_enviar_conf_clicked()
 
         //ui->label_size_terminal->setText(q_bytes);
         //ui->label_received_terminal->setText(q_msg);
-        arpet->portDisconnect();
+        ComBT->portDisconnect();
     }
     catch(Exceptions & ex)
     {
         QMessageBox::critical(this,tr("Atención"),tr(ex.excdesc));
-        arpet->portDisconnect();
+        ComBT->portDisconnect();
     }
 }
 
