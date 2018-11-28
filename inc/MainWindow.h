@@ -37,11 +37,14 @@
 #include <QString>
 #include <QPixmap>
 #include <QTextStream>
+#include "SetPMTs.h"
 #include <inc/QRoundProgressBar.h>
+
 #include "ui_MainWindow.h"
 
 
 #define TIEMPOS_NULOS_PMTS 0
+#define MED_POR_CICLO 320
 #define CHAR_LF 0x0A
 
 #define WAIT_MICROSECONDS 1000000
@@ -81,6 +84,7 @@ public:
     ~MainWindow();
     //void resetHitsValues(QString head);
     bool fileExists(QString path);
+    SetPMTs *pmt_select;
     /* Area de prueba/testing */
 
 private slots:
@@ -121,6 +125,11 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_comboBox_3_currentIndexChanged(int index);
+
+
+    void on_pb_enviar_conf_clicked();
+    
 private:
     QString openConfigurationFile();
     QString openLogFile();

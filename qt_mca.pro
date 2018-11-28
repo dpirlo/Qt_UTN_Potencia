@@ -10,6 +10,7 @@
 QT       += core gui
 QT       += printsupport
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = qt-arpet
@@ -22,7 +23,8 @@ SOURCES += src/main.cpp\
         src/SetPreferences.cpp \
         src/MainWindow.cpp \
         src/apThread.cpp \
-        src/QRoundProgressBar.cpp
+        src/QRoundProgressBar.cpp \
+    src/SetPMTs.cpp
 
 HEADERS  += \
         inc/qcustomplot.h \
@@ -31,9 +33,11 @@ HEADERS  += \
         inc/SetPreferences.h \
         inc/MainWindow.h \
         inc/apThread.hpp \
-        inc/QRoundProgressBar.h
+        inc/QRoundProgressBar.h \
+    inc/SetPMTs.h
 
 LIBS += -L/usr/local/lib -lboost_system
+
 
 STYLES += qdarkstyle/style.qrc \
         qdarkstyle/style.qss

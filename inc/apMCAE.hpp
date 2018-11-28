@@ -106,7 +106,7 @@ namespace ap {
 
   public:
     /** @note: Se encuentra configurado con un _timeout_ de 50ms por defecto*/
-    MCAE(size_t timeout=50);
+    MCAE(size_t timeout=500);
     void portReadString(string *msg, char delimeter, const char *tty_port_name);
     void portReadBufferString(string *msg, int buffer_size, const char *tty_port_name);
     size_t portWrite(string *msg, const char *tty_port_name);

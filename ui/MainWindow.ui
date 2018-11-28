@@ -222,7 +222,7 @@
          </property>
         </widget>
        </widget>
-       <widget class="QComboBox" name="comboBox_2">
+       <widget class="QComboBox" name="cb_alpha_pw">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -236,8 +236,13 @@
           <string>Alpha</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>Pulse W.</string>
+         </property>
+        </item>
        </widget>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pb_enviar_conf">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -250,7 +255,7 @@
          <string>Enviar</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="le_conf">
         <property name="geometry">
          <rect>
           <x>100</x>
@@ -263,9 +268,9 @@
        <widget class="QFrame" name="frame_2">
         <property name="geometry">
          <rect>
-          <x>489</x>
+          <x>400</x>
           <y>9</y>
-          <width>251</width>
+          <width>211</width>
           <height>151</height>
          </rect>
         </property>
@@ -275,12 +280,12 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QLabel" name="label_4">
+        <widget class="QLabel" name="label_potEficaz">
          <property name="geometry">
           <rect>
            <x>10</x>
            <y>10</y>
-           <width>231</width>
+           <width>191</width>
            <height>31</height>
           </rect>
          </property>
@@ -293,12 +298,12 @@
           <string>Pot Media:</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_7">
+        <widget class="QLabel" name="label_tenEficaz">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>40</y>
-           <width>231</width>
+           <y>60</y>
+           <width>191</width>
            <height>31</height>
           </rect>
          </property>
@@ -308,15 +313,15 @@
           </font>
          </property>
          <property name="text">
-          <string>Pot Eficaz:</string>
+          <string>Ten. Media:</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_11">
+        <widget class="QLabel" name="label_corEficaz">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>70</y>
-           <width>231</width>
+           <y>110</y>
+           <width>191</width>
            <height>31</height>
           </rect>
          </property>
@@ -326,34 +331,280 @@
           </font>
          </property>
          <property name="text">
-          <string>Ten. Eficaz:</string>
+          <string>Cor. Media:</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_12">
+        <widget class="QFrame" name="frame_3">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>100</y>
-           <width>231</width>
-           <height>31</height>
+           <x>210</x>
+           <y>30</y>
+           <width>211</width>
+           <height>151</height>
           </rect>
          </property>
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="text">
-          <string>Cor. Eficaz:</string>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
          </property>
+         <widget class="QLabel" name="label_potMedia_2">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Pot Media:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_potEficaz_2">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>40</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Pot Eficaz:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_tenEficaz_2">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>70</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Ten. Eficaz:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_corEficaz_2">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Cor. Eficaz:</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QFrame" name="frame_4">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>60</y>
+           <width>211</width>
+           <height>141</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="label_potMedia_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Pot Media:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_potEficaz_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>40</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Pot Eficaz:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_tenEficaz_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>70</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Ten. Eficaz:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_corEficaz_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Cor. Eficaz:</string>
+          </property>
+         </widget>
+         <widget class="QFrame" name="frame_5">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>10</y>
+            <width>361</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QLabel" name="label_potMedia_4">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>191</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Pot Media:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_potEficaz_4">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>40</y>
+             <width>191</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Pot Eficaz:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_tenEficaz_4">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>70</y>
+             <width>191</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Ten. Eficaz:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_corEficaz_4">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>100</y>
+             <width>191</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Cor. Eficaz:</string>
+           </property>
+          </widget>
+         </widget>
         </widget>
        </widget>
        <widget class="QLabel" name="label_10">
         <property name="geometry">
          <rect>
-          <x>350</x>
+          <x>300</x>
           <y>20</y>
-          <width>121</width>
+          <width>101</width>
           <height>31</height>
          </rect>
         </property>
@@ -363,7 +614,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Mediciones:</string>
+         <string>Medición:</string>
         </property>
        </widget>
        <widget class="QComboBox" name="cb_Fase">
@@ -377,17 +628,17 @@
         </property>
         <item>
          <property name="text">
-          <string>Fase R</string>
+          <string>Tension</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Fase S</string>
+          <string>Corriente</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Fase T</string>
+          <string>Potencia</string>
          </property>
         </item>
        </widget>
@@ -404,6 +655,351 @@
          <string>Adquirir Valores</string>
         </property>
        </widget>
+       <widget class="QFrame" name="frame_6">
+        <property name="geometry">
+         <rect>
+          <x>620</x>
+          <y>10</y>
+          <width>211</width>
+          <height>151</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QLabel" name="label_potEficaz_5">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>191</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Pot Eficaz:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_tenEficaz_5">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>60</y>
+           <width>191</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Ten. Eficaz:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_corEficaz_5">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>110</y>
+           <width>191</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Cor. Eficaz:</string>
+         </property>
+        </widget>
+        <widget class="QFrame" name="frame_7">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>30</y>
+           <width>211</width>
+           <height>151</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="label_potMedia_6">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Pot Media:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_potEficaz_6">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>40</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Pot Eficaz:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_tenEficaz_6">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>70</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Ten. Eficaz:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_corEficaz_6">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Cor. Eficaz:</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QFrame" name="frame_8">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>60</y>
+           <width>211</width>
+           <height>141</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="label_potMedia_7">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Pot Media:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_potEficaz_7">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>40</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Pot Eficaz:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_tenEficaz_7">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>70</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Ten. Eficaz:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_corEficaz_7">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Cor. Eficaz:</string>
+          </property>
+         </widget>
+         <widget class="QFrame" name="frame_9">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>10</y>
+            <width>361</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QLabel" name="label_potMedia_8">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>191</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Pot Media:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_potEficaz_8">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>40</y>
+             <width>191</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Pot Eficaz:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_tenEficaz_8">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>70</y>
+             <width>191</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Ten. Eficaz:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_corEficaz_8">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>100</y>
+             <width>191</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Cor. Eficaz:</string>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+       </widget>
+       <zorder>comboBox_3</zorder>
+       <zorder>pushButton_3</zorder>
+       <zorder>frame</zorder>
+       <zorder>cb_alpha_pw</zorder>
+       <zorder>pb_enviar_conf</zorder>
+       <zorder>le_conf</zorder>
+       <zorder>label_10</zorder>
+       <zorder>cb_Fase</zorder>
+       <zorder>pushButton_2</zorder>
+       <zorder>frame_6</zorder>
+       <zorder>frame_2</zorder>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -603,6 +1199,9 @@
         <width>341</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="text">
+       <string>/dev/rfcomm0</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_8">

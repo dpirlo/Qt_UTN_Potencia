@@ -44,6 +44,10 @@
         <file>rc/cargando2.gif</file>
         <file>rc/icono_alpha.jpeg</file>
         <file>rc/grilla.dat</file>
+        <file>rc/1.png</file>
+        <file>rc/2.png</file>
+        <file>rc/3.png</file>
+        <file>rc/4.png</file>
     </qresource>
     <qresource prefix="/qdarkstyle">
         <file>style.qss</file>
