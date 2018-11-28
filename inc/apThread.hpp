@@ -1,11 +1,10 @@
 /**
  * @class ap::Thread
  *
- * @brief Clase Thread para la aplicación *qt-mca*
+ * @brief Clase Thread para la aplicación *qt-utn*
  *
  * Esta clase provee métodos y propiedades para el manejo de hilos de procesamiento en
- * segundo plano durante la ejecución de la aplicación *qt-mca*. Principalmente se utiliza
- * para el _logging_ de tasa y temperatura de cada cámara gamma.
+ * segundo plano durante la ejecución de la aplicación *qt-utn*.
  *
  * @note Clase heredada de QObject
  *

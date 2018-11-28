@@ -716,8 +716,11 @@ void MainWindow::on_pushButton_2_clicked()
 {
     QVector<double> x(MED_POR_CICLO), CorT(MED_POR_CICLO), CorS(MED_POR_CICLO),CorR(MED_POR_CICLO),
             TenT(MED_POR_CICLO), TenS(MED_POR_CICLO),TenR(MED_POR_CICLO),
-            PotS(MED_POR_CICLO), PotR(MED_POR_CICLO),PotT(MED_POR_CICLO);
-    int VmedCor=0,VmedTen=0,VefCor,VefTen,VmedPot=0;
+            PotS(MED_POR_CICLO), PotR(MED_POR_CICLO),PotT(MED_POR_CICLO),
+            PotEfaux(MED_POR_CICLO), tenEfaux(MED_POR_CICLO),CorEfaux(MED_POR_CICLO),
+            PotEf(MED_POR_CICLO),TenEf(MED_POR_CICLO),CorEf(MED_POR_CICLO);
+
+    double VmedCor=0,VmedTen=0,VefCor,VefTen,VefPot,VmedPot=0;
 
     QString sended ="";// ui->lineEdit_terminal->text();
     size_t bytes=0;
@@ -726,15 +729,15 @@ void MainWindow::on_pushButton_2_clicked()
     QString Modo;
     switch(getModo){
     case 0:{
-        Modo="SC";
+        Modo="S";
         break;
     }
     case 1:{
-        Modo="TC";
+        Modo="T";
         break;
     }
     case 2:{
-        Modo="Di";
+        Modo="D";
         break;
     }
     default:
@@ -948,11 +951,21 @@ void MainWindow::on_pushButton_2_clicked()
               VmedTen+=TenR[i];
               VmedCor+=CorR[i];
               VmedPot+=abs(PotR[i]);
+              VefTen+=(TenR[i]*TenR[i]);
+              VefCor+=(CorR[i]*CorR[i]);
+              VefPot+=(PotR[i]*PotR[i]);
             }
 
-            ui->label_tenEficaz->setText("VMed de Tension: "+QString::number(VmedTen));
-            ui->label_corEficaz->setText("Vmed de Corriente: "+QString::number(VmedCor));
-            ui->label_potEficaz->setText("Vmed de Potencia: "+QString::number(VmedPot));
+
+            /*
+
+            PotEfaux(MED_POR_CICLO), tenEfaux(MED_POR_CICLO),CorEfaux(MED_POR_CICLO),
+            PotEf(MED_POR_CICLO),TenEf(MED_POR_CICLO),CorEf(MED_POR_CICLO);
+
+            int VmedCor=0,VmedTen=0,VefCor,VefTen,VmedPot=0;
+
+*/
+
             ui->specPMTs_3->graph(0)->setData(x, TenR);
             ui->specPMTs_3->graph(1)->setData(x, CorR);
             ui->specPMTs_3->graph(2)->setData(x, PotR);
@@ -969,10 +982,11 @@ void MainWindow::on_pushButton_2_clicked()
               VmedTen+=TenS[i];
               VmedCor+=CorS[i];
               VmedPot+=abs(PotS[i]);
+              VefTen+=(TenS[i]*TenS[i]);
+              VefCor+=(CorS[i]*CorS[i]);
+              VefPot+=(PotS[i]*PotS[i]);
             }
-            ui->label_tenEficaz->setText("VMed de Tension: "+QString::number(VmedTen));
-            ui->label_corEficaz->setText("Vmed de Corriente: "+QString::number(VmedCor));
-            ui->label_potEficaz->setText("Vmed de Potencia: "+QString::number(VmedPot));
+
             ui->specPMTs_3->graph(0)->setData(x, TenS);
             ui->specPMTs_3->graph(1)->setData(x, CorS);
             ui->specPMTs_3->graph(2)->setData(x, PotS);
@@ -990,13 +1004,10 @@ void MainWindow::on_pushButton_2_clicked()
               VmedTen+=TenT[i];
               VmedCor+=CorT[i];
               VmedPot+=abs(PotT[i]);
+              VefTen+=(TenT[i]*TenT[i]);
+              VefCor+=(CorT[i]*CorT[i]);
+              VefPot+=(PotT[i]*PotT[i]);
             }
-            VmedTen=VmedTen;
-            VmedCor=VmedCor;
-            VmedPot=VmedPot;
-            ui->label_tenEficaz->setText("VMed de Tension: "+QString::number(VmedTen));
-            ui->label_corEficaz->setText("Vmed de Corriente: "+QString::number(VmedCor));
-            ui->label_potEficaz->setText("Vmed de Potencia: "+QString::number(VmedPot));
 
             ui->specPMTs_3->graph(0)->setData(x, TenT);
             ui->specPMTs_3->graph(1)->setData(x, CorT);
@@ -1010,6 +1021,13 @@ void MainWindow::on_pushButton_2_clicked()
 
     }
     }
+
+    ui->label_tenEficaz->setText("Ten. Eficaz: "+QString::number(sqrt(VefTen)));
+    ui->label_corEficaz->setText("Cor. Eficaz: "+QString::number(sqrt(VefCor)));
+    ui->label_potEficaz->setText("Pot. Eficaz: "+QString::number(sqrt(VefPot)));
+    ui->label_tenMedia->setText("Ten. Media: "+QString::number((VmedTen)));
+    ui->label_corMedia->setText("Cor. Media: "+QString::number((VmedCor)));
+    ui->label_potMedia->setText("Pot. Media: "+QString::number((VmedPot)));
 
     }
 
@@ -1165,11 +1183,11 @@ void MainWindow::on_pb_enviar_conf_clicked()
     QString Modo;
 //    switch(getModo){
 //    case 0:{
-//        Modo="SC";
+//        Modo="S";
 //        break;
 //    }
 //    case 1:{
-//        Modo="TC";
+//        Modo="T";
 //        break;
 //    }
 //    default:
@@ -1195,7 +1213,7 @@ void MainWindow::on_pb_enviar_conf_clicked()
         port_name="/dev/rfcomm0";
         ComBT->portConnect(port_name.toStdString().c_str());
 
-        sended =Modo+Config+(char) ui->le_conf->text().toInt();//+";";
+        sended =Modo+Config+(char) ((float)ui->le_conf->text().toInt()*8/9);//+";";
 
         bytes = sendString(sended.toStdString(),"");
         msg = readString();

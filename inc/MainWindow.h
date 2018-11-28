@@ -3,7 +3,7 @@
  *
  * @brief Clase de entorno gráfico
  *
- * Esta clase corresponde al entorno gráfico de la aplicación *qt-mca*
+ * Esta clase corresponde al entorno gráfico de la aplicación *qt-utn*
  *
  *
  * @note Utiliza la clase MCAE para la comunicación con el ComBT.
@@ -54,7 +54,7 @@
 using namespace ap;
 
 /**
-    El Namespace Ui contiene los métodos y propiedades del entorno gráfico de la aplicación qt-mca.
+    El Namespace Ui contiene los métodos y propiedades del entorno gráfico de la aplicación qt-utn.
 */
 namespace Ui {
 class MainWindow;

@@ -4,7 +4,7 @@
  * @brief Clase de preferencias
  *
  * Esta clase provee métodos y propiedades para el manejo
- * del QDialog que administra las preferencias de la aplicación qt-mca.
+ * del QDialog que administra las preferencias de la aplicación qt-utn.
  *
  * @note Clase heredada de QDialog
  *

@@ -280,7 +280,7 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QLabel" name="label_potEficaz">
+        <widget class="QLabel" name="label_potMedia">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -298,7 +298,7 @@
           <string>Pot Media:</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_tenEficaz">
+        <widget class="QLabel" name="label_tenMedia">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -316,7 +316,7 @@
           <string>Ten. Media:</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_corEficaz">
+        <widget class="QLabel" name="label_corMedia">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -670,7 +670,7 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QLabel" name="label_potEficaz_5">
+        <widget class="QLabel" name="label_potEficaz">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -688,7 +688,7 @@
           <string>Pot Eficaz:</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_tenEficaz_5">
+        <widget class="QLabel" name="label_tenEficaz">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -706,7 +706,7 @@
           <string>Ten. Eficaz:</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_corEficaz_5">
+        <widget class="QLabel" name="label_corEficaz">
          <property name="geometry">
           <rect>
            <x>10</x>
