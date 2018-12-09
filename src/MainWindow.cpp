@@ -529,6 +529,35 @@ void MainWindow::on_pushButton_flush_terminal_clicked()
 {
     ComBT->portFlush();
 }
+
+
+
+/**
+ * @brief MainWindow::readBufferString
+ *
+ * Método general de lectura de _buffer_ de datos por protocolo serie
+ *
+ * @param buffer_size
+ * @return Mensaje recibido en _string_
+ */
+string MainWindow::readBufferString(int buffer_size)
+{
+    mMutex.lock();
+
+    string msg;
+    try{
+        msg = ComBT->readBufferString(buffer_size,port_name.toStdString());
+    }
+    catch( Exceptions & ex ){
+        Exceptions exception_stop(ex.excdesc);
+        mMutex.unlock();
+        throw exception_stop;
+    }
+
+    mMutex.unlock();
+
+    return msg;
+}
 /**
  * @brief MainWindow::on_pushButton_clear_terminal_clicked
  */
@@ -721,9 +750,13 @@ void MainWindow::on_pushButton_2_clicked()
             PotEf(MED_POR_CICLO),TenEf(MED_POR_CICLO),CorEf(MED_POR_CICLO);
 
     double VmedCor=0,VmedTen=0,VefCor,VefTen,VefPot,VmedPot=0;
-
+    int b;
+    int bytes;
+    QString men;
+    QByteArray mensaje;
+    port_name="/dev/rfcomm0";
     QString sended ="";// ui->lineEdit_terminal->text();
-    size_t bytes=0;
+    //size_t bytes=0;
     string msg;
     int getModo=ui->comboBox_3->currentIndex();
     QString Modo;
@@ -773,26 +806,83 @@ void MainWindow::on_pushButton_2_clicked()
             switch(ui->cb_Fase->currentIndex()){
             case 0:{
 
-                sended =Modo+"V";
+                ////////////////// USADO PARA DEBUGUEAR ///////////////
+                sended ="MV;";
 
                 bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    TenR[i]=QString::fromStdString(msg).toInt();
+
+                //msg=readBufferString(3);
+
+                char v='V';
+                msg=readString();//readBufferString(bytes+2);
+                bytes=(unsigned int )(0x00ff&msg[1]);
+
+                men=QString::fromStdString(msg);
+                mensaje.clear();
+                mensaje.append(men.toUtf8());
+                TenR.clear();
+                for (int i=2;i<(bytes);i++){
+
+                    b=(0x00ff&msg[i]);
+                    TenR.append((b));
+                    x[i] = i;
                 }
 
                 ui->specPMTs_3->graph(0)->setData(x, TenR);
                 break;
             }
             case 1:{
-                sended =Modo+"C";
+
+
+
+
+                ////////////////// USADO PARA DEBUGUEAR ///////////////
+                sended ="MI;";
 
                 bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    CorR[i]=QString::fromStdString(msg).toInt();
+
+                //msg=readBufferString(3);
+
+                msg=readString();//readBufferString(bytes+2);
+                int bytes=(unsigned int )(0x00ff&msg[1]);
+
+                men=QString::fromStdString(msg);
+                mensaje.clear();
+                mensaje.append(men.toUtf8());
+                CorR.clear();
+                for (int i=3;i<(bytes);i++){
+
+                    b=(((0x00ff&msg[i+3])-127));
+                    CorR.append((b));
+                    VmedCor+=CorR[i-3];
+                    VefCor+=(CorR[i-3]*CorR[i-3]);
+                    x[i-3] = i-3;
                 }
-                ui->specPMTs_3->graph(1)->setData(x, CorR);
+
+                VmedCor=VmedCor*5000/((bytes-3)*0.185*255);
+
+                ui->specPMTs_3->graph(0)->setData(x, CorR);
+
+
+
+//                for (int i=0; i<MED_POR_CICLO; ++i)
+//                {
+//                  x[i] = i;
+//                  TenS[i]=qSin(i/10.0);
+//                  CorS[i]=qSin(i/10.0)*0.8;
+//                  PotS[i]=TenS[i]*CorS[i];
+//                  VmedTen+=TenS[i];
+//                  VmedCor+=CorS[i];
+//                  VmedPot+=abs(PotS[i]);
+//                  VefTen+=(TenS[i]*TenS[i]);
+//                  VefCor+=(CorS[i]*CorS[i]);
+//                  VefPot+=(PotS[i]*PotS[i]);
+//                }
+
+
+
+
+
                 break;
 
             }
@@ -800,18 +890,37 @@ void MainWindow::on_pushButton_2_clicked()
                 sended =Modo+"V";
 
                 bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
+                //for (int i=0;i<MED_POR_CICLO;i++){
                     msg = readString();
-                    TenR[i]=QString::fromStdString(msg).toInt();
+                    men=QString::fromStdString(msg);
+                    mensaje.clear();
+                    mensaje.append(men.toUtf8());
+                    TenR.clear();
+                for (int i=0;i<MED_POR_CICLO;i++){
+
+                    b=mensaje.at(i);
+                    TenR.append((b));
+                    x[i] = i;
                 }
+
 
                 sended =Modo+"C";
 
                 bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
+                //for (int i=0;i<MED_POR_CICLO;i++){
                     msg = readString();
-                    CorR[i]=QString::fromStdString(msg).toInt();
+                    men=QString::fromStdString(msg);
+                    mensaje.clear();
+                    mensaje.append(men.toUtf8());
+                    CorR.clear();
+                for (int i=0;i<MED_POR_CICLO;i++){
+
+                    b=mensaje.at(i);
+                    CorR.append((b));
+                    x[i] = i;
                 }
+
+
 
                 for (int i=0;i<MED_POR_CICLO;i++){
                     PotR[i]=TenR[i]*CorR[i];
@@ -832,9 +941,17 @@ void MainWindow::on_pushButton_2_clicked()
                 sended =Modo+"V";
 
                 bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
+                //for (int i=0;i<MED_POR_CICLO;i++){
                     msg = readString();
-                    TenR[i]=QString::fromStdString(msg).toInt();
+                    QString men=QString::fromStdString(msg);
+                    QByteArray mensaje;
+                    mensaje.append(men.toUtf8());
+                    TenR.clear();
+                for (int i=0;i<MED_POR_CICLO;i++){
+
+                    b=mensaje.at(i);
+                    TenR.append((b));
+                    x[i] = i;
                 }
 
                 ui->specPMTs_3->graph(0)->setData(x, TenR);
@@ -942,7 +1059,7 @@ void MainWindow::on_pushButton_2_clicked()
         case 3:{
         switch(ui->cb_Fase->currentIndex()){
         case 0:{
-            for (int i=0; i<320; ++i)
+            for (int i=0; i<MED_POR_CICLO; ++i)
             {
               x[i] = i;
               TenR[i]=qCos(i/10.0);
@@ -969,11 +1086,10 @@ void MainWindow::on_pushButton_2_clicked()
             ui->specPMTs_3->graph(0)->setData(x, TenR);
             ui->specPMTs_3->graph(1)->setData(x, CorR);
             ui->specPMTs_3->graph(2)->setData(x, PotR);
-            ui->label_info->setText("VMed de Corriente: "+QString::number(VmedCor)+"   VMed de Tension: "+QString::number(VmedTen)+"    Vmed de Potencia: "+QString::number(VmedPot));
             break;
         }
         case 1:{
-            for (int i=0; i<320; ++i)
+            for (int i=0; i<MED_POR_CICLO; ++i)
             {
               x[i] = i;
               TenS[i]=qSin(i/10.0);
@@ -990,12 +1106,11 @@ void MainWindow::on_pushButton_2_clicked()
             ui->specPMTs_3->graph(0)->setData(x, TenS);
             ui->specPMTs_3->graph(1)->setData(x, CorS);
             ui->specPMTs_3->graph(2)->setData(x, PotS);
-            ui->label_info->setText("VMed de Corriente: "+QString::number(VmedCor)+"   VMed de Tension: "+QString::number(VmedTen)+"    Vmed de Potencia: "+QString::number(VmedPot));
 
             break;
         }
         case 2:{
-            for (int i=0; i<320; ++i)
+            for (int i=0; i<MED_POR_CICLO; ++i)
             {
               x[i] = i;
               TenT[i]=qSin(i/10.0);
@@ -1012,7 +1127,6 @@ void MainWindow::on_pushButton_2_clicked()
             ui->specPMTs_3->graph(0)->setData(x, TenT);
             ui->specPMTs_3->graph(1)->setData(x, CorT);
             ui->specPMTs_3->graph(2)->setData(x, PotT);
-            ui->label_info->setText("VMed de Corriente: "+QString::number(VmedCor)+"   VMed de Tension: "+QString::number(VmedTen)+"    Vmed de Potencia: "+QString::number(VmedPot));
 
             break;
         }
@@ -1022,9 +1136,9 @@ void MainWindow::on_pushButton_2_clicked()
     }
     }
 
-    ui->label_tenEficaz->setText("Ten. Eficaz: "+QString::number(sqrt(VefTen)));
-    ui->label_corEficaz->setText("Cor. Eficaz: "+QString::number(sqrt(VefCor)));
-    ui->label_potEficaz->setText("Pot. Eficaz: "+QString::number(sqrt(VefPot)));
+    ui->label_tenEficaz->setText("Ten. Eficaz: "+QString::number(sqrt(VefTen)/bytes));
+    ui->label_corEficaz->setText("Cor. Eficaz: "+QString::number(sqrt(VefCor)/bytes));
+    ui->label_potEficaz->setText("Pot. Eficaz: "+QString::number(sqrt(VefPot)/bytes));
     ui->label_tenMedia->setText("Ten. Media: "+QString::number((VmedTen)));
     ui->label_corMedia->setText("Cor. Media: "+QString::number((VmedCor)));
     ui->label_potMedia->setText("Pot. Media: "+QString::number((VmedPot)));
@@ -1045,6 +1159,8 @@ void MainWindow::on_pushButton_2_clicked()
     // Note: we could have also just called customPlot->rescaleAxes(); instead
     // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select graphs by clicking:
     ui->specPMTs_3->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    ui->specPMTs_3->rescaleAxes();
+    ui->specPMTs_3->replot();
 }
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
@@ -1176,23 +1292,24 @@ void MainWindow::on_pb_enviar_conf_clicked()
    // string end_stream=ComBT->getEnd_MCA();
     QString port=ui->EditText_Puerto->text();
     //ComBT->portDisconnect();
-
-    int SetConfig=ui->cb_alpha_pw->currentIndex();
-    QString Config;
+    int var =ui->le_conf->text().toInt();
+//    int SetConfig=ui->cb_alpha_pw->currentIndex();
     int getModo=ui->comboBox_3->currentIndex();
+
+    QString Config;
     QString Modo;
-//    switch(getModo){
-//    case 0:{
-//        Modo="S";
-//        break;
-//    }
-//    case 1:{
-//        Modo="T";
-//        break;
-//    }
-//    default:
-//        return;
-//    }
+    switch(getModo){
+    case 0:{
+        Modo="S";
+        break;
+    }
+    case 1:{
+        Modo="T";
+        break;
+    }
+    default:
+        return;
+    }
 
 
 //    switch(SetConfig){
@@ -1212,12 +1329,15 @@ void MainWindow::on_pb_enviar_conf_clicked()
 
         port_name="/dev/rfcomm0";
         ComBT->portConnect(port_name.toStdString().c_str());
+        if (var<2)var=2;
+        sended =Modo+(char)((((unsigned int )var*8/9)))+';';
+        QByteArray send=sended.toLatin1();
 
-        sended =Modo+Config+(char) ((float)ui->le_conf->text().toInt()*8/9);//+";";
+        string algo=""+(char)send.at(0)+(char)send.at(1)+(char)send.at(2)+'\0';
+        bytes = sendString(send.data(),"");
 
-        bytes = sendString(sended.toStdString(),"");
         msg = readString();
-
+        cout << msg<<endl;
         ui->label_size_terminal_2->setText(QString::fromStdString(msg));
 
         QString q_msg=QString::fromStdString(msg);

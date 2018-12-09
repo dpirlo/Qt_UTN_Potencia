@@ -38,7 +38,7 @@
 
 
 #define TIEMPOS_NULOS_PMTS 0
-#define MED_POR_CICLO 320
+#define MED_POR_CICLO 160
 #define CHAR_LF 0x0A
 
 #define WAIT_MICROSECONDS 1000000
@@ -132,6 +132,7 @@ private:
     bool copyRecursively(const QString &srcFilePath,const QString &tgtFilePath);
     size_t sendString(string msg, string end);
     string readString(char delimeter='\r');
+    string readBufferString(int buffer_size);
     string getLocalDateAndTime();
     int getPMT(QLineEdit *line_edit);
     int Adq_zone;

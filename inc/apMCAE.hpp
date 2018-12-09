@@ -101,7 +101,7 @@ namespace ap {
 
   public:
     /** @note: Se encuentra configurado con un _timeout_ de 50ms por defecto*/
-    MCAE(size_t timeout=500);
+    MCAE(size_t timeout=5000);
     void portReadString(string *msg, char delimeter, const char *tty_port_name);
     void portReadBufferString(string *msg, int buffer_size, const char *tty_port_name);
     size_t portWrite(string *msg, const char *tty_port_name);
@@ -138,6 +138,7 @@ namespace ap {
     string setEscDes(string head,string on_off, string port_name);
 
     /* Area de métodos en testing */
+    string convertDecToHex(int dec_number);
 
 
   private:
@@ -171,7 +172,6 @@ namespace ap {
     string formatMCAEStreamSize(int expected_size, string data_stream);
     bool verifyCheckSum(string data_mca);
     int convertHexToDec(string hex_number);
-    string convertDecToHex(int dec_number);
     string convertDecToHexUpper(int dec_number);
 //    string getCalibTableFormat(string function, QVector<double> table);
     int convertDoubleToInt(double value);
