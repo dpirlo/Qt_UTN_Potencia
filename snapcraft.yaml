@@ -1,0 +1,21 @@
+name: qt-utn
+version: 1
+summary: Qt Example
+description: A simple text editor
+
+apps:
+  application:
+    command: qt-utn
+    plugs:
+      - unity7
+      - home
+
+parts:
+  application:
+    plugin: qmake
+    build-packages:
+      - qtbase5-dev
+    stage-packages:
+      # Here for the plugins-- they're not linked in automatically.
+      - libqt5gui5
+    after: [qt5conf] # A wiki part

@@ -13,7 +13,7 @@ QT       += printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = qt-Utn
+TARGET = qt-utn
 TEMPLATE = app
 
 SOURCES += src/main.cpp\

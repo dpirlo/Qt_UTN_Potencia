@@ -1,0 +1,17 @@
+!PrimeState
+dependency_paths: !!set {}
+directories: !!set
+  bin: null
+  etc: null
+  etc/xdg: null
+  etc/xdg/qtchooser: null
+files: !!set
+  bin/qt5-launch: null
+  etc/xdg/qtchooser/snappy-qt5.conf: null
+project_options: {}
+properties:
+  override-prime: snapcraftctl prime
+  prime:
+  - '*'
+scriptlet_metadata: !ExtractedMetadata
+  _data: {}
