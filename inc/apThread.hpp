@@ -42,7 +42,7 @@ namespace ap {
       Q_OBJECT
 
   public:
-      explicit Thread(shared_ptr<MCAE> _ComBT, QMutex* _mutex ,QObject *parent = 0);
+      explicit Thread(MCAE* _ComBT, QMutex* _mutex ,QObject *parent = 0);
       void requestLog();
       void requestMCA();
       int GitUpdater();
@@ -52,7 +52,7 @@ namespace ap {
 
 
   private:
-      shared_ptr<MCAE> ComBT;
+      MCAE* ComBT;
       QList<int> checkedHeads;
       QList<QString> pmt_selected_list;
       bool _abort;

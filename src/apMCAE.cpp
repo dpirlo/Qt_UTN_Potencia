@@ -123,14 +123,14 @@ bool MCAE::isPortOpen()
  * @param tty_port_name
  * @return Código de error
  */
-error_code MCAE::portConnect(const char *tty_port_name)
+std::error_code MCAE::portConnect(const char *tty_port_name)
 {
-    error_code error_code;
-    port->open(tty_port_name, error_code);
-    if (error_code.value()==0)
+    boost::system::error_code ec;
+    port->open(tty_port_name);
+    if (ec.value()==0)
         port->set_option(serial_port_base::baud_rate(PortBaudRate));
 
-    return error_code;
+    return ec;
 }
 /**
  * @brief MCAE::portDisconnect
@@ -139,13 +139,13 @@ error_code MCAE::portConnect(const char *tty_port_name)
  *
  * @return Código de error
  */
-error_code MCAE::portDisconnect()
+std::error_code MCAE::portDisconnect()
 {
-    error_code error_code;
+    std::error_code ec;
     if (port->is_open())
-        port->close(error_code);
+        port->close();
 
-    return error_code;
+    return ec;
 }
 /**
  * @brief MCAE::portWrite
@@ -313,13 +313,13 @@ void MCAE::portReadBufferString(string *msg, int buffer_size, const char *tty_po
  *
  * @return Código de error
  */
-error_code MCAE::portFlush()
+std::error_code MCAE::portFlush()
 {
-    error_code ec;
+    std::error_code ec;
 
     const bool isFlushed =! ::tcflush(port->native(), TCIOFLUSH);
     if (!isFlushed)
-        ec = error_code(errno,error::get_system_category());
+        ec = std::error_code(errno,error::get_system_category());
 
     return ec;
 }

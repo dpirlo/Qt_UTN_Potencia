@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     preferencesfile(""),
     ui(new Ui::MainWindow)
 {
-    ComBT = shared_ptr<MCAE>(new MCAE());
+    ComBT =  (new MCAE());
     thread = new QThread();
     worker = new Thread(ComBT, &mMutex);
 

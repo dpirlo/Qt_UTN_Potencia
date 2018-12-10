@@ -17,7 +17,7 @@ using namespace ap;
  * @param _mutex
  * @param parent
  */
-Thread::Thread(shared_ptr<MCAE> _ComBT, QMutex *_mutex, QObject *parent) :
+Thread::Thread(MCAE *_ComBT, QMutex *_mutex, QObject *parent) :
     QObject(parent),
     ComBT(_ComBT),
     _logging(false),

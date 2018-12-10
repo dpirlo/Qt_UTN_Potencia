@@ -81,7 +81,7 @@ using namespace boost::system;
  *
  * Definición del tipo serial_port_ptr como un _shared pointer_ de la clase *serial_port*
  */
-typedef shared_ptr<serial_port> serial_port_ptr;
+typedef serial_port *serial_port_ptr;
 
 /**
  * El Namespace ap contiene los métodos y propiedades relacionados con la comunicación.
@@ -108,9 +108,9 @@ namespace ap {
     size_t sendString(string msg, string end, string port_name);
     string readString(char delimeter, string port_name);
     string readBufferString(int buffer_size, string port_name);
-    error_code portFlush();
-    error_code portConnect(const char *tty_port_name);
-    error_code portDisconnect();
+    std::error_code portFlush();
+    std::error_code portConnect(const char *tty_port_name);
+    std::error_code portDisconnect();
 //    void getMCASplitData(string msg_data, int channels);
 //    void setMCAEStream(string pmt_dec, int size_stream, string function, string channel_dec="");
 //    void setMCAEStream(string pmt_dec, string function, double time);

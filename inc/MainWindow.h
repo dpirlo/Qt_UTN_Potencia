@@ -165,7 +165,7 @@ signals:
 private:
     Ui::MainWindow *ui;
     SetPreferences *pref;
-    shared_ptr<MCAE> ComBT;
+    MCAE* ComBT;
     QMutex mMutex, bMutex, Mutex_adq,Mutex_copy,Mutex_git;
     QThread *thread;
     Thread *worker;
