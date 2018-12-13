@@ -46,8 +46,8 @@ private:
   void SetAllPMTBoard();
 
 private slots:
-  void on_pushButton_select_all_clicked();
-  void on_pushButton_select_none_clicked();
+//  void on_pushButton_select_all_clicked();
+  //void on_pushButton_select_none_clicked();
 
 private:
   Ui::SetPMTs *ui;

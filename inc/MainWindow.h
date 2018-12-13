@@ -94,9 +94,9 @@ private slots:
     /* Slots de sincronización en el entorno gráfico */
 
     /* Buttons */
-    void on_pushButton_send_terminal_clicked();
-    void on_pushButton_flush_terminal_clicked();
-    void on_pushButton_clear_terminal_clicked();
+   // void on_pushButton_send_terminal_clicked();
+    //void on_pushButton_flush_terminal_clicked();
+   // void on_pushButton_clear_terminal_clicked();
 
     /* AutoCalib */
 
@@ -105,7 +105,7 @@ private slots:
 
     /* Buttons de prueba/testing */
 
-    void on_pushButton_p_51_clicked();
+   // void on_pushButton_p_51_clicked();
 
     void updateCaption();
 
@@ -115,7 +115,7 @@ private slots:
 
     void on_comboBox_currentIndexChanged(int index);
 
-    void on_pushButton_4_clicked();
+   // void on_pushButton_4_clicked();
 
     void on_pushButton_3_clicked();
 
@@ -124,6 +124,8 @@ private slots:
 
     void on_pb_enviar_conf_clicked();
     
+    void on_actionPreferencias_triggered();
+
 private:
     QString openConfigurationFile();
     QString openLogFile();

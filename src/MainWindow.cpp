@@ -61,17 +61,6 @@ MainWindow::~MainWindow()
     thread->wait();
     delete thread;
     delete worker;
-
-    etime_wr->abort();
-    etime_th->wait();
-    delete etime_th;
-    delete etime_wr;
-
-    mcae_wr->abort();
-    mcae_th->wait();
-    delete mcae_th;
-    delete mcae_wr;
-
     delete pref;
     delete ui;
 }
@@ -85,6 +74,8 @@ void MainWindow::setPreferencesConfiguration()
     writePreferencesFile(default_pref_file, preferencesfile);
     getPreferencesSettingsFile();
     writeDebugToStdOutLogFile();
+    pref = new SetPreferences(this);
+
 }
 /**
  * @brief MainWindow::SetQCustomPlotConfiguration
@@ -489,46 +480,46 @@ size_t MainWindow::sendString(string msg, string end)
 /**
  * @brief MainWindow::on_pushButton_send_terminal_clicked
  */
-void MainWindow::on_pushButton_send_terminal_clicked()
-{
-    QString sended ="";// ui->lineEdit_terminal->text();
-    size_t bytes=0;
-    string msg;
-   // string end_stream=ComBT->getEnd_MCA();
-    QString Cabezal="";//ui->comboBox_head_select_terminal->currentText();
-    ComBT->portDisconnect();
+//void MainWindow::on_pushButton_send_terminal_clicked()
+//{
+//    QString sended ="";// ui->lineEdit_terminal->text();
+//    size_t bytes=0;
+//    string msg;
+//   // string end_stream=ComBT->getEnd_MCA();
+//    QString Cabezal="";//ui->comboBox_head_select_terminal->currentText();
+//    ComBT->portDisconnect();
 
-    try
-    {
+//    try
+//    {
 
-        port_name=ui->EditText_Puerto->text();
-        ComBT->portConnect(port_name.toStdString().c_str());
+//        port_name=ui->EditText_Puerto->text();
+//        ComBT->portConnect(port_name.toStdString().c_str());
 
-        //if(ui->checkBox_end_terminal->isChecked()) end_stream=ComBT->getEnd_PSOC();
+//        //if(ui->checkBox_end_terminal->isChecked()) end_stream=ComBT->getEnd_PSOC();
 
-        bytes = sendString(sended.toStdString(),"");
-        msg = readString();
+//        bytes = sendString(sended.toStdString(),"");
+//        msg = readString();
 
-        QString q_msg=QString::fromStdString(msg);
-        QString q_bytes=QString::number(bytes);
+//        QString q_msg=QString::fromStdString(msg);
+//        QString q_bytes=QString::number(bytes);
 
-        //ui->label_size_terminal->setText(q_bytes);
-        //ui->label_received_terminal->setText(q_msg);
-        ComBT->portDisconnect();
-    }
-    catch(Exceptions & ex)
-    {
-        QMessageBox::critical(this,tr("Atención"),tr(ex.excdesc));
-        ComBT->portDisconnect();
-    }
-}
+//        //ui->label_size_terminal->setText(q_bytes);
+//        //ui->label_received_terminal->setText(q_msg);
+//        ComBT->portDisconnect();
+//    }
+//    catch(Exceptions & ex)
+//    {
+//        QMessageBox::critical(this,tr("Atención"),tr(ex.excdesc));
+//        ComBT->portDisconnect();
+//    }
+//}
 /**
  * @brief MainWindow::on_pushButton_flush_terminal_clicked
  */
-void MainWindow::on_pushButton_flush_terminal_clicked()
-{
-    ComBT->portFlush();
-}
+//void MainWindow::on_pushButton_flush_terminal_clicked()
+//{
+//    ComBT->portFlush();
+//}
 
 
 
@@ -561,10 +552,10 @@ string MainWindow::readBufferString(int buffer_size)
 /**
  * @brief MainWindow::on_pushButton_clear_terminal_clicked
  */
-void MainWindow::on_pushButton_clear_terminal_clicked()
-{
-    //ui->lineEdit_terminal->clear();
-}
+//void MainWindow::on_pushButton_clear_terminal_clicked()
+//{
+//    //ui->lineEdit_terminal->clear();
+//}
 
 QVector<int> MainWindow::getCustomPlotParameters()
 {
@@ -657,9 +648,9 @@ QStringList MainWindow::getLogFromFiles(QString filename,QRegExp rx, string pars
     return values.split(rx, QString::SkipEmptyParts);
 }
 
-void MainWindow::on_pushButton_p_51_clicked()
-{
-}
+//void MainWindow::on_pushButton_p_51_clicked()
+//{
+//}
 
 
 
@@ -1143,6 +1134,7 @@ void MainWindow::on_pushButton_2_clicked()
     ui->label_corMedia->setText("Cor. Media: "+QString::number((VmedCor)));
     ui->label_potMedia->setText("Pot. Media: "+QString::number((VmedPot)));
 
+    ComBT->portDisconnect();
     }
 
     catch(Exceptions & ex)
@@ -1255,10 +1247,10 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
    }
 }
 
-void MainWindow::on_pushButton_4_clicked()
-{
+//void MainWindow::on_pushButton_4_clicked()
+//{
 
-}
+//}
 
 void MainWindow::on_pushButton_3_clicked()
 {
@@ -1355,3 +1347,37 @@ void MainWindow::on_pb_enviar_conf_clicked()
 }
 
 
+
+void MainWindow::on_actionPreferencias_triggered()
+{
+    getPreferencesSettingsFile();
+    pref->setCalibDir(root_calib_path);
+    pref->setConfFile(initfile);
+    pref->setDegugConsoleValue(debug);
+    pref->setLogFileValue(log);
+    pref->setDebugStdOutValue(stdout_mode);
+
+    int ret = pref->exec();
+    bool debug_console = pref->getDegugConsoleValue();
+    bool log_file = pref->getLogFileValue();
+    bool stdout_pref = pref->getDebugStdOutValue();
+    QString file = pref->getInitFileConfigPath();
+    QString calib_path = pref->getCalibDirectoryPath();
+
+    if(ret == QDialog::Accepted)
+    {
+        setDebugMode(debug_console);
+        setLogMode(log_file);
+        setStdOutDebugMode(stdout_pref);
+        QString boolDebugText = debug_console ? "true" : "false";
+        QString boolLogText = log_file ? "true" : "false";
+        QString boolStdOutText = stdout_pref ? "true" : "false";
+        setPreferencesSettingsFile("Modo", "debug", boolDebugText );
+        setPreferencesSettingsFile("Modo", "log", boolLogText );
+        setPreferencesSettingsFile("Modo", "stdout", boolStdOutText );
+        setPreferencesSettingsFile("Paths", "conf_set_file", file);
+        setPreferencesSettingsFile("Paths", "calib_set_file", calib_path);
+        getPreferencesSettingsFile();
+        writeDebugToStdOutLogFile();
+    }
+}

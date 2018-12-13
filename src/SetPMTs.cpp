@@ -96,14 +96,14 @@ void SetPMTs::SetAllPMTBoard()
 /**
  * @brief SetPMTs::on_pushButton_select_all_clicked
  */
-void SetPMTs::on_pushButton_select_all_clicked()
-{
-  SetAllPMTBoard();
-}
+//void SetPMTs::on_pushButton_select_all_clicked()
+//{
+//  SetAllPMTBoard();
+//}
 /**
  * @brief SetPMTs::on_pushButton_select_none_clicked
  */
-void SetPMTs::on_pushButton_select_none_clicked()
-{
-  ClearPMTBoard();
-}
+//void SetPMTs::on_pushButton_select_none_clicked()
+//{
+//  ClearPMTBoard();
+//}

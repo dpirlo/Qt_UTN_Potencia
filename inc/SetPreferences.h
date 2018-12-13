@@ -22,6 +22,8 @@
 #include "QMessageBox"
 #include <iostream>
 
+#include "ui_SetPreferences.h"
+
 using namespace std;
 
 namespace Ui {
@@ -39,6 +41,7 @@ public:
   virtual int exec();
   ~SetPreferences();
 
+  QList<QString> ListaBT;
 private:
   QString openConfigurationFile(bool dir=false);
   QString readPreferencesFile(QString conf_set_file);
@@ -150,8 +153,9 @@ public:
   void setConfFile(QString file_path){initfile = file_path;}
 
 private slots:
-  void on_pushButton_open_config_file_clicked();
-  void on_pushButton_open_config_calib_clicked();  
+  //void on_pushButton_open_config_file_clicked();
+  //void on_pushButton_open_config_calib_clicked();
+  void on_pushButton_clicked();
 };
 
 #endif // SETPREFERENCES_H

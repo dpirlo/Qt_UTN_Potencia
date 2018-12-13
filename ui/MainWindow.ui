@@ -1299,7 +1299,7 @@
    </property>
    <widget class="QMenu" name="menuArchivo">
     <property name="title">
-     <string>Archivo</string>
+     <string>Preferencias</string>
     </property>
     <addaction name="actionPreferencias"/>
     <addaction name="separator"/>
