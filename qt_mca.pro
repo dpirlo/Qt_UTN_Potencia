@@ -68,5 +68,5 @@ DISTFILES += \
     images/ic_cancel.png \
     images/ic_check_circle.png
 
-#QMAKE_CXXFLAGS+= -std=c++98
-#QMAKE_LFLAGS +=  -std=c++98
+QMAKE_CXXFLAGS+= -std=c++11
+QMAKE_LFLAGS +=  -std=c++11

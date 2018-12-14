@@ -123,7 +123,7 @@ bool MCAE::isPortOpen()
  * @param tty_port_name
  * @return Código de error
  */
-std::error_code MCAE::portConnect(const char *tty_port_name)
+boost::system::error_code MCAE::portConnect(const char *tty_port_name)
 {
     boost::system::error_code ec;
     port->open(tty_port_name);
@@ -318,8 +318,8 @@ std::error_code MCAE::portFlush()
     std::error_code ec;
 
     const bool isFlushed =! ::tcflush(port->native(), TCIOFLUSH);
-    if (!isFlushed)
-        ec = std::error_code(errno,error::get_system_category());
+    if (!isFlushed);
+       // ec = std::error_code(errno,error::get_system_category());
 
     return ec;
 }

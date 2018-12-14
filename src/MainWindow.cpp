@@ -59,6 +59,7 @@ MainWindow::~MainWindow()
     ComBT->portDisconnect();
     worker->abort();
     thread->wait();
+    DisconnectBluetooth();
     delete thread;
     delete worker;
     delete pref;
@@ -134,20 +135,20 @@ void MainWindow::SetQCustomPlotSlots(string title_pmt_str, string title_head_str
 void MainWindow::connectSlots()
 {
 
-    QProcess killall;
-    killall.waitForStarted();
-    killall.start("rfcomm -a");
-    QString output;
-    while(killall.waitForReadyRead(1000)) {
-        output+=killall.readAll();
-    }
+//    QProcess killall;
+//    killall.waitForStarted();
+//    killall.start("rfcomm -a");
+//    QString output;
+//    while(killall.waitForReadyRead(1000)) {
+//        output+=killall.readAll();
+//    }
 
-    if(output.contains("20:16:02:30:99:61"))
-    {
-        killall.execute("sudo rfcomm connect 0 20:16:02:30:99:61 1");
-        killall.waitForFinished(1000);
-        //cout<<killall.readAll().toStdString()<<endl;
-    }
+//    if(output.contains("20:16:02:30:99:61"))
+//    {
+//        killall.execute("sudo rfcomm connect 0 20:16:02:30:99:61 1");
+//        killall.waitForFinished(1000);
+//        //cout<<killall.readAll().toStdString()<<endl;
+//    }
 }
 
 /**
@@ -1345,7 +1346,19 @@ void MainWindow::on_pb_enviar_conf_clicked()
         ComBT->portDisconnect();
     }
 }
-
+/**
+ * @brief MainWindow::DisconnectBluetooth
+ */
+void MainWindow::DisconnectBluetooth(){
+    QProcess killall;
+    killall.waitForStarted();
+    killall.start("sudo pkill rfcomm");
+    QString output;
+    while(killall.waitForReadyRead(10000)) {
+        output+=killall.readAll();
+    }
+    cout<<output.toStdString()<<endl;
+}
 
 
 void MainWindow::on_actionPreferencias_triggered()

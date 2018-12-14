@@ -35,12 +35,13 @@ void SetPreferences::accept()
     BT.replace(")","");
     QProcess killall;
     killall.waitForStarted();
+    cout<<BT.toStdString()<<endl;
     killall.start("sudo rfcomm connect 0 "+BT +" 1");
     QString output;
-    while(killall.waitForReadyRead(100000)) {
+    while(killall.waitForReadyRead(10000)) {
         output+=killall.readAll();
     }
-
+    cout<<output.toStdString()<<endl;
     QDialog::accept();
 }
 /**

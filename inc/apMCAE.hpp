@@ -109,7 +109,7 @@ namespace ap {
     string readString(char delimeter, string port_name);
     string readBufferString(int buffer_size, string port_name);
     std::error_code portFlush();
-    std::error_code portConnect(const char *tty_port_name);
+    boost::system::error_code portConnect(const char *tty_port_name);
     std::error_code portDisconnect();
 //    void getMCASplitData(string msg_data, int channels);
 //    void setMCAEStream(string pmt_dec, int size_stream, string function, string channel_dec="");

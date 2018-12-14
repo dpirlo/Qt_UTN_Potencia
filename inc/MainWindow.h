@@ -91,6 +91,7 @@ private slots:
     void CargoTemaOscuro();
     void TimerUpdate();
 
+    void DisconnectBluetooth();
     /* Slots de sincronización en el entorno gráfico */
 
     /* Buttons */
