@@ -1,0 +1,19 @@
+name: qt-utn
+version: 1
+summary: Qt Example
+description: A simple text editor
+architectures:
+- amd64
+confinement: devmode
+grade: devel
+apps:
+  qt-utn:
+    command: command-qt-utn.wrapper
+    plugs:
+    - unity7
+    - home
+    - x11
+    - wayland
+    - desktop
+    - desktop-legacy
+    - network-bind

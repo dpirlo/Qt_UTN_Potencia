@@ -1,0 +1,24 @@
+!BuildState
+assets:
+  installed-packages: []
+  installed-snaps: [core=6034, snapcraft=2374, wallpaperdownloader=22]
+  uname: 'Linux 4.4.0-139-generic #165-Ubuntu SMP Wed Oct 24 10:58:50 UTC 2018 x86_64
+    x86_64 x86_64 GNU/Linux'
+extracted_metadata:
+  files: []
+  metadata: !ExtractedMetadata
+    _data: {}
+project_options: {deb_arch: amd64}
+properties:
+  after: []
+  build: ''
+  build-attributes: []
+  build-packages: [qtbase5-dev]
+  disable-parallel: false
+  install: ''
+  organize: {}
+  override-build: snapcraftctl build
+  prepare: ''
+schema_properties: []
+scriptlet_metadata: !ExtractedMetadata
+  _data: {}

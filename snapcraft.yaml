@@ -2,16 +2,22 @@ name: qt-utn
 version: 1
 summary: Qt Example
 description: A simple text editor
-
+grade: devel
+confinement: devmode
 apps:
-  application:
-    command: qt-utn
+  qt-utn:
+    command: qt5-launch
     plugs:
-      - unity7
-      - home
+        - unity7
+        - home
+        - x11
+        - wayland # let it run on wayland, because it's gtk3 so it should be fine
+        - desktop # needed for a lot of gtk3 and glib interaction with the host system
+        - desktop-legacy # needed for accessibility tools IIRC
+        - network-bind
 
 parts:
-  application:
+  qt-utn:
     plugin: qmake
     build-packages:
       - qtbase5-dev
