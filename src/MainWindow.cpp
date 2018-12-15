@@ -972,10 +972,15 @@ void MainWindow::on_pushButton_2_clicked()
                 for (int i=3;i<(bytes);i++){
 
                     b=(((0x00ff&msg[i+3])-127));
-                    CorR.append((b));
+                    //if(i==3){
+                        CorR.append((b));
+//                    }else{
+//                        CorR.append((b+CorR.at(i-3))/2);
+//                    }
                     VmedCor+=CorR[i-3];
                     VefCor+=(CorR[i-3]*CorR[i-3]);
                     x[i-3] = i-3;
+
                 }
 
                 VmedCor=VmedCor*5000/((bytes-3)*0.185*255);
@@ -1393,4 +1398,19 @@ void MainWindow::on_actionPreferencias_triggered()
         getPreferencesSettingsFile();
         writeDebugToStdOutLogFile();
     }
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    static int FotoN=0;
+    QString logFile = "foto-";
+    QFile logger( logFile+QString::number(FotoN++)+".jpg" );
+    logger.open(QIODevice::WriteOnly | QIODevice::Append);
+// bool QCustomPlot::savePng ( const QString &  fileName, int  width = 0, int  height = 0, double  scale = 1.0, int  quality = -1, int  resolution = 96, QCP::ResolutionUnit  resolutionUnit = QCP::ruDotsPerInch  )
+
+
+    ui->specPMTs_3->saveJpg(logFile);
+        //logger.write( log_text.toUtf8());
+
+    logger.close();
 }

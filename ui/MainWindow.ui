@@ -989,6 +989,19 @@
          </property>
         </item>
        </widget>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>840</x>
+          <y>110</y>
+          <width>121</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Guardar Imagen</string>
+        </property>
+       </widget>
        <zorder>comboBox_3</zorder>
        <zorder>pushButton_3</zorder>
        <zorder>frame</zorder>
@@ -1000,6 +1013,7 @@
        <zorder>frame_6</zorder>
        <zorder>frame_2</zorder>
        <zorder>cb_Fase</zorder>
+       <zorder>pushButton</zorder>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -1294,7 +1308,7 @@
      <x>0</x>
      <y>0</y>
      <width>1031</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">

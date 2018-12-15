@@ -127,6 +127,8 @@ private slots:
     
     void on_actionPreferencias_triggered();
 
+    void on_pushButton_clicked();
+
 private:
     QString openConfigurationFile();
     QString openLogFile();
