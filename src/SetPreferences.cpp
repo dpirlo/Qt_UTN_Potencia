@@ -38,7 +38,7 @@ void SetPreferences::accept()
     cout<<BT.toStdString()<<endl;
     killall.start("sudo rfcomm connect 0 "+BT +" 1");
     QString output;
-    while(killall.waitForReadyRead(10000)) {
+    while(killall.waitForReadyRead(1000)) {
         output+=killall.readAll();
     }
     cout<<output.toStdString()<<endl;
@@ -77,6 +77,21 @@ int SetPreferences::exec()
 SetPreferences::~SetPreferences()
 {
     delete ui;
+}
+
+
+/**
+ * @brief MainWindow::DisconnectBluetooth
+ */
+void SetPreferences::DisconnectBluetooth(){
+    QProcess killall;
+    killall.waitForStarted();
+    killall.start("sudo pkill rfcomm");
+    QString output;
+    while(killall.waitForReadyRead(100000)) {
+        output+=killall.readAll();
+    }
+    cout<<output.toStdString()<<endl;
 }
 
 /**
@@ -139,4 +154,9 @@ void SetPreferences::on_pushButton_clicked()
 //        killall.waitForFinished(1000);
 //        //cout<<killall.readAll().toStdString()<<endl;
 //    }
+}
+
+void SetPreferences::on_pushButton_2_clicked()
+{
+    DisconnectBluetooth();
 }

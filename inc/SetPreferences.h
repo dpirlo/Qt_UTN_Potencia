@@ -70,6 +70,7 @@ private:
   bool stdoutmode;
   QString initfile, root_calib_path;
   QString preferencesdir, preferencesfile;
+  void DisconnectBluetooth();
 
 public:
   /**
@@ -156,6 +157,7 @@ private slots:
   //void on_pushButton_open_config_file_clicked();
   //void on_pushButton_open_config_calib_clicked();
   void on_pushButton_clicked();
+  void on_pushButton_2_clicked();
 };
 
 #endif // SETPREFERENCES_H

@@ -803,9 +803,6 @@ void MainWindow::on_pushButton_2_clicked()
 
                 bytes = sendString(sended.toStdString(),"");
 
-                //msg=readBufferString(3);
-
-                char v='V';
                 msg=readString();//readBufferString(bytes+2);
                 bytes=(unsigned int )(0x00ff&msg[1]);
 
@@ -813,12 +810,19 @@ void MainWindow::on_pushButton_2_clicked()
                 mensaje.clear();
                 mensaje.append(men.toUtf8());
                 TenR.clear();
-                for (int i=2;i<(bytes);i++){
 
-                    b=(0x00ff&msg[i]);
+
+
+                for (int i=3;i<(bytes);i++){
+
+                    b=(((0x00ff&msg[i+3])-127));
                     TenR.append((b));
-                    x[i] = i;
+                    VmedTen+=TenR[i-3];
+                    VefTen+=(TenR[i-3]*TenR[i-3]);
+                    x[i-3] = i-3;
                 }
+
+                VmedTen=VmedTen*5000/((bytes-3)*0.185*255);
 
                 ui->specPMTs_3->graph(0)->setData(x, TenR);
                 break;
@@ -826,14 +830,10 @@ void MainWindow::on_pushButton_2_clicked()
             case 1:{
 
 
-
-
                 ////////////////// USADO PARA DEBUGUEAR ///////////////
                 sended ="MI;";
 
                 bytes = sendString(sended.toStdString(),"");
-
-                //msg=readBufferString(3);
 
                 msg=readString();//readBufferString(bytes+2);
                 int bytes=(unsigned int )(0x00ff&msg[1]);
@@ -856,61 +856,56 @@ void MainWindow::on_pushButton_2_clicked()
                 ui->specPMTs_3->graph(0)->setData(x, CorR);
 
 
-
-//                for (int i=0; i<MED_POR_CICLO; ++i)
-//                {
-//                  x[i] = i;
-//                  TenS[i]=qSin(i/10.0);
-//                  CorS[i]=qSin(i/10.0)*0.8;
-//                  PotS[i]=TenS[i]*CorS[i];
-//                  VmedTen+=TenS[i];
-//                  VmedCor+=CorS[i];
-//                  VmedPot+=abs(PotS[i]);
-//                  VefTen+=(TenS[i]*TenS[i]);
-//                  VefCor+=(CorS[i]*CorS[i]);
-//                  VefPot+=(PotS[i]*PotS[i]);
-//                }
-
-
-
-
-
                 break;
 
             }
             case 2:{
-                sended =Modo+"V";
+                sended ="MV;";
 
                 bytes = sendString(sended.toStdString(),"");
-                //for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    men=QString::fromStdString(msg);
-                    mensaje.clear();
-                    mensaje.append(men.toUtf8());
-                    TenR.clear();
-                for (int i=0;i<MED_POR_CICLO;i++){
 
-                    b=mensaje.at(i);
+                msg=readString();//readBufferString(bytes+2);
+                bytes=(unsigned int )(0x00ff&msg[1]);
+
+                men=QString::fromStdString(msg);
+                mensaje.clear();
+                mensaje.append(men.toUtf8());
+                TenR.clear();
+
+
+
+                for (int i=3;i<(bytes);i++){
+
+                    b=(((0x00ff&msg[i+3])-127));
                     TenR.append((b));
-                    x[i] = i;
+                    VmedTen+=TenR[i-3];
+                    VefTen+=(TenR[i-3]*TenR[i-3]);
+                    x[i-3] = i-3;
                 }
 
+                VmedTen=VmedTen*5000/((bytes-3)*0.185*255);
 
-                sended =Modo+"C";
+                sended ="MI;";
 
                 bytes = sendString(sended.toStdString(),"");
-                //for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    men=QString::fromStdString(msg);
-                    mensaje.clear();
-                    mensaje.append(men.toUtf8());
-                    CorR.clear();
-                for (int i=0;i<MED_POR_CICLO;i++){
 
-                    b=mensaje.at(i);
+                msg=readString();//readBufferString(bytes+2);
+                int bytes=(unsigned int )(0x00ff&msg[1]);
+
+                men=QString::fromStdString(msg);
+                mensaje.clear();
+                mensaje.append(men.toUtf8());
+                CorR.clear();
+                for (int i=3;i<(bytes);i++){
+
+                    b=(((0x00ff&msg[i+3])-127));
                     CorR.append((b));
-                    x[i] = i;
+                    VmedCor+=CorR[i-3];
+                    VefCor+=(CorR[i-3]*CorR[i-3]);
+                    x[i-3] = i-3;
                 }
+
+                VmedCor=VmedCor*5000/((bytes-3)*0.185*255);
 
 
 
@@ -930,111 +925,116 @@ void MainWindow::on_pushButton_2_clicked()
             switch(ui->cb_Fase->currentIndex()){
             case 0:{
 
-                sended =Modo+"V";
+                ////////////////// USADO PARA DEBUGUEAR ///////////////
+                sended ="MV;";
 
                 bytes = sendString(sended.toStdString(),"");
-                //for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    QString men=QString::fromStdString(msg);
-                    QByteArray mensaje;
-                    mensaje.append(men.toUtf8());
-                    TenR.clear();
-                for (int i=0;i<MED_POR_CICLO;i++){
 
-                    b=mensaje.at(i);
+                msg=readString();//readBufferString(bytes+2);
+                bytes=(unsigned int )(0x00ff&msg[1]);
+
+                men=QString::fromStdString(msg);
+                mensaje.clear();
+                mensaje.append(men.toUtf8());
+                TenR.clear();
+
+
+
+                for (int i=3;i<(bytes);i++){
+
+                    b=(((0x00ff&msg[i+3])-127));
                     TenR.append((b));
-                    x[i] = i;
+                    VmedTen+=TenR[i-3];
+                    VefTen+=(TenR[i-3]*TenR[i-3]);
+                    x[i-3] = i-3;
                 }
+
+                VmedTen=VmedTen*5000/((bytes-3)*0.185*255);
 
                 ui->specPMTs_3->graph(0)->setData(x, TenR);
                 break;
-
             }
             case 1:{
-                sended =Modo+"C";
+
+
+                ////////////////// USADO PARA DEBUGUEAR ///////////////
+                sended ="MI;";
 
                 bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    CorR[i]=QString::fromStdString(msg).toInt();
+
+                msg=readString();//readBufferString(bytes+2);
+                int bytes=(unsigned int )(0x00ff&msg[1]);
+
+                men=QString::fromStdString(msg);
+                mensaje.clear();
+                mensaje.append(men.toUtf8());
+                CorR.clear();
+                for (int i=3;i<(bytes);i++){
+
+                    b=(((0x00ff&msg[i+3])-127));
+                    CorR.append((b));
+                    VmedCor+=CorR[i-3];
+                    VefCor+=(CorR[i-3]*CorR[i-3]);
+                    x[i-3] = i-3;
                 }
-                ui->specPMTs_3->graph(1)->setData(x, CorR);
+
+                VmedCor=VmedCor*5000/((bytes-3)*0.185*255);
+
+                ui->specPMTs_3->graph(0)->setData(x, CorR);
+
+
                 break;
 
             }
             case 2:{
-                sended =Modo+"V";
+                sended ="MV;";
 
                 bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    TenR[i]=QString::fromStdString(msg).toInt();
+
+                msg=readString();//readBufferString(bytes+2);
+                bytes=(unsigned int )(0x00ff&msg[1]);
+
+                men=QString::fromStdString(msg);
+                mensaje.clear();
+                mensaje.append(men.toUtf8());
+                TenR.clear();
+
+
+
+                for (int i=3;i<(bytes);i++){
+
+                    b=(((0x00ff&msg[i+3])-127));
+                    TenR.append((b));
+                    VmedTen+=TenR[i-3];
+                    VefTen+=(TenR[i-3]*TenR[i-3]);
+                    x[i-3] = i-3;
                 }
 
-                sended =Modo+"C";
+                VmedTen=VmedTen*5000/((bytes-3)*0.185*255);
+
+                sended ="MI;";
 
                 bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    CorR[i]=QString::fromStdString(msg).toInt();
+
+                msg=readString();//readBufferString(bytes+2);
+                int bytes=(unsigned int )(0x00ff&msg[1]);
+
+                men=QString::fromStdString(msg);
+                mensaje.clear();
+                mensaje.append(men.toUtf8());
+                CorR.clear();
+                for (int i=3;i<(bytes);i++){
+
+                    b=(((0x00ff&msg[i+3])-127));
+                    CorR.append((b));
+                    VmedCor+=CorR[i-3];
+                    VefCor+=(CorR[i-3]*CorR[i-3]);
+                    x[i-3] = i-3;
                 }
 
-                for (int i=0;i<MED_POR_CICLO;i++){
-                    PotR[i]=TenR[i]*CorR[i];
-                }
-                ui->specPMTs_3->graph(0)->setData(x, TenR);
-                ui->specPMTs_3->graph(1)->setData(x, CorR);
-                ui->specPMTs_3->graph(2)->setData(x, PotR);
-                break;
-            }
-            }
-            break;
+                VmedCor=VmedCor*5000/((bytes-3)*0.185*255);
 
-        }
-        case 2:{
-            switch(ui->cb_Fase->currentIndex()){
-            case 0:{
 
-                sended =Modo+"V";
-
-                bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    TenR[i]=QString::fromStdString(msg).toInt();
-                }
-
-                ui->specPMTs_3->graph(0)->setData(x, TenR);
-                break;
-
-            }
-            case 1:{
-                sended =Modo+"C";
-
-                bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    CorR[i]=QString::fromStdString(msg).toInt();
-                }
-                ui->specPMTs_3->graph(1)->setData(x, CorR);
-                break;
-
-            }
-            case 2:{
-                sended =Modo+"V";
-
-                bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    TenR[i]=QString::fromStdString(msg).toInt();
-                }
-
-                sended =Modo+"C";
-
-                bytes = sendString(sended.toStdString(),"");
-                for (int i=0;i<MED_POR_CICLO;i++){
-                    msg = readString();
-                    CorR[i]=QString::fromStdString(msg).toInt();
-                }
 
                 for (int i=0;i<MED_POR_CICLO;i++){
                     PotR[i]=TenR[i]*CorR[i];
